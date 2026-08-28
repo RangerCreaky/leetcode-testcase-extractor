@@ -6,6 +6,7 @@ This project aims to get test cases by mimicing a human failing one test case at
 
 Using a selenium bot, I submit empty code, and leetcode tells me what testcase I got wrong. The bot adds an if statement to cover this testcase, and submits again. In doing so, it gains access to every test case.
 
+<<<<<<< HEAD
 ## Current LeetCode UI
 
 The extractor now targets LeetCode's current problem workspace:
@@ -38,6 +39,8 @@ The runner maintains a `Completed` column in that CSV. Missing values are initia
 
 Cookie login remains supported through `main/leetcode_cookies.csv`. By default the extractor uses undetected-chromedriver in a visible Chrome window, because LeetCode's bot verification commonly blocks ordinary headless Selenium. Set `LEETCODE_HEADLESS=1` for server/container use, or `LEETCODE_DRIVER=selenium` to opt into the standard Selenium driver. Driver/browser versions are detected automatically; `CHROME_VERSION_MAIN` is available only as an override for unusual installations.
 
+=======
+>>>>>>> c3b4fe7740cf1e5f23568026f97431d8a0192ecb
 https://github.com/akhilkammila/leetcode-testcase-extractor/assets/68196076/f0a0e54b-d429-4d0e-b000-63d8aa63546f
 
 https://github.com/akhilkammila/leetcode-testcase-extractor/assets/68196076/ac8f7def-3fe8-4957-a06b-b10ea8721cf1
@@ -128,4 +131,8 @@ Remembering some of the hurdles I overcame:
         - leetcode does not accept files over 100,000 characters in length
         - can hash the input, but cannot hash the output to circumvent this
         - api calls within leetcode are blocked for security reasons
+<<<<<<< HEAD
         - file compression can comrpess file by 50% at best – we need 100:1 or better
+=======
+        - file compression can comrpess file by 50% at best – we need 100:1 or better
+>>>>>>> c3b4fe7740cf1e5f23568026f97431d8a0192ecb
