@@ -6,41 +6,6 @@ This project aims to get test cases by mimicing a human failing one test case at
 
 Using a selenium bot, I submit empty code, and leetcode tells me what testcase I got wrong. The bot adds an if statement to cover this testcase, and submits again. In doing so, it gains access to every test case.
 
-<<<<<<< HEAD
-## Current LeetCode UI
-
-The extractor now targets LeetCode's current problem workspace:
-
-- the Monaco code editor is selected through its `Code editor` accessibility label;
-- language, reset, submit, and result controls use accessibility or `data-e2e-locator` hooks instead of layout-dependent element paths;
-- submission completion and acceptance are read from the result panel rather than inferred from the URL; and
-- the separate CodeMirror custom-testcase editor is deliberately ignored.
-
-Install and run from the repository root:
-
-```bash
-python3 -m pip install -r requirements.txt
-python3 main/runner.py 0
-```
-
-Pass multiple problem row numbers to process them sequentially. An accepted problem exits cleanly and the runner continues with the next requested row:
-
-```bash
-python3 main/runner.py 0 1 2
-```
-
-To process every unfinished row in `problem_data/problem_data.csv`:
-
-```bash
-python3 main/runner.py --all
-```
-
-The runner maintains a `Completed` column in that CSV. Missing values are initialized to `FALSE`; a row is changed to `TRUE` only after its submission is Accepted. Both `--all` and explicit row-number runs skip rows already marked `TRUE`, so an interrupted batch resumes from the first unfinished problem.
-
-Cookie login remains supported through `main/leetcode_cookies.csv`. By default the extractor uses undetected-chromedriver in a visible Chrome window, because LeetCode's bot verification commonly blocks ordinary headless Selenium. Set `LEETCODE_HEADLESS=1` for server/container use, or `LEETCODE_DRIVER=selenium` to opt into the standard Selenium driver. Driver/browser versions are detected automatically; `CHROME_VERSION_MAIN` is available only as an override for unusual installations.
-
-=======
->>>>>>> c3b4fe7740cf1e5f23568026f97431d8a0192ecb
 https://github.com/akhilkammila/leetcode-testcase-extractor/assets/68196076/f0a0e54b-d429-4d0e-b000-63d8aa63546f
 
 https://github.com/akhilkammila/leetcode-testcase-extractor/assets/68196076/ac8f7def-3fe8-4957-a06b-b10ea8721cf1
@@ -52,10 +17,6 @@ Leetcode makes it hard to access testcases. Leetcode only shows a testcase if a 
 To fail one test case at a time, I scrape the names of the input and output variables. After failing a testcase, I format an IF statement which passes just that test case, and resubmit.
 
 Sometimes, leetcode doesn't even show the full testcase, because it is too long. I need to use the clipboard for this, clicking a copy button, and pasting it into a local file. There are also runtime errors when no if statement is caught, stale elements when submitting, etc.
-
-The extractor waits 10 seconds before each submission and 20 seconds before retrying a rate-limited submission. These can be adjusted with `LEETCODE_SUBMIT_DELAY` and `LEETCODE_RETRY_DELAY`, respectively.
-
-Full testcase values remain in the local `data/` archive. When large array, string, tuple, or dictionary literals would push submitted code toward LeetCode's source-size limit, the browser submission automatically uses stable SHA-256 comparisons instead. This keeps the local extraction lossless while making the judge submission much smaller.
 
 Once I got the bot to deal with submission delays, login recaptchas, and runtime errors, it ran consistently.
 
@@ -131,8 +92,4 @@ Remembering some of the hurdles I overcame:
         - leetcode does not accept files over 100,000 characters in length
         - can hash the input, but cannot hash the output to circumvent this
         - api calls within leetcode are blocked for security reasons
-<<<<<<< HEAD
         - file compression can comrpess file by 50% at best – we need 100:1 or better
-=======
-        - file compression can comrpess file by 50% at best – we need 100:1 or better
->>>>>>> c3b4fe7740cf1e5f23568026f97431d8a0192ecb
